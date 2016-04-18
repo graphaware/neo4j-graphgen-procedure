@@ -52,18 +52,6 @@ public class NodeProcedureTest extends ProcedureIntegrationTest {
 
     }
 
-    private void assertNodesCount(int c) {
-        int i = 0;
-        try (Transaction tx = getDatabase().beginTx()) {
-            for (org.neo4j.graphdb.Node node : getDatabase().getAllNodes()) {
-                ++i;
-            }
-
-            tx.success();
-        }
-        assertEquals(c, i);
-    }
-
     private void assertNodesWithLabelCount(int c, String... labels) {
         int i = 0;
         try (Transaction tx = getDatabase().beginTx()) {

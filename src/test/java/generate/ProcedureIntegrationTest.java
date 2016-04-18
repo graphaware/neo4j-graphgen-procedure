@@ -50,5 +50,4 @@ public abstract class ProcedureIntegrationTest {
         return rows;
     }
 
-
 }
