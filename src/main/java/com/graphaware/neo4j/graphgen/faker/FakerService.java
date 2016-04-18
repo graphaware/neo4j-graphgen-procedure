@@ -19,9 +19,11 @@ public class FakerService {
     private static final String CITY    = "city";
 
     private final Faker faker;
+    private final Random random;
 
     public FakerService(GraphgenConfiguration configuration) {
-        faker = new Faker(new Random(configuration.getSeedValue()));
+        this.random = new Random(configuration.getSeedValue());
+        faker = new Faker(random);
     }
 
     public List<Object> getValues(Property property, int number) {
@@ -50,6 +52,10 @@ public class FakerService {
             default:
                 throw new IllegalArgumentException(String.format("Undefined value generator name '%s'", property.generatorName()));
         }
+    }
+
+    public Random getRandom() {
+        return random;
     }
 
 }
