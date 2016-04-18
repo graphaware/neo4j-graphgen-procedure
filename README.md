@@ -11,7 +11,7 @@
 
 Nodes are generated using the `generate.nodes()` procedure call. The procedure takes 3 arguments :
 
-* A `string` representing one or multiple labels (eg: `'Person'` or `'Person,User'`)
+* A `string or list of strings` representing one or multiple labels (eg: `'Person'` or `['Person', 'User']`)
 * An `inline yaml string` definition of key/value pairs where value represent a data generator (eg: `'{firstname: firstName, age:{numberBetween:[18,35]}}'`)
 * An `integer` representing the amount of nodes to be generated
 

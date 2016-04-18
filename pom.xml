@@ -6,7 +6,7 @@
 
     <groupId>com.graphaware.neo4j</groupId>
     <artifactId>graphaware-graphgen-procedure</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-ALPHA</version>
 
     <packaging>jar</packaging>
     <name>graphaware-graphgen-with-dependencies</name>
