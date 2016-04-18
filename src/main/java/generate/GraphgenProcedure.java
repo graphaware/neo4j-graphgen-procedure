@@ -28,9 +28,7 @@ public class GraphgenProcedure {
     private static GraphgenService graphgenService;
 
     protected GraphgenService getGraphgenService() {
-        if (null == graphgenService) {
-            graphgenService = new GraphgenService(database);
-        }
+        graphgenService = new GraphgenService(database);
 
         return graphgenService;
     }

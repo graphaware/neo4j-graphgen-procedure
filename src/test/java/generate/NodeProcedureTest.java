@@ -29,7 +29,7 @@ public class NodeProcedureTest extends ProcedureIntegrationTest {
 
     @Test
     public void testGenerateNodeWithMultipleLabels() {
-        executeCypher("CALL generate.nodes(['Cool','Test','Awesome'])");
+        executeCypher("CALL generate.nodes(['Cool','Test','Awesome'], '', 1)");
         assertNodesWithLabelCount(1, "Cool,Test,Awesome".split(","));
     }
 
