@@ -65,9 +65,34 @@ YIELD relationships as relationships RETURN *
 
 * `city`
 * `country`
+* `state`
+* `streetAddress`
+* `streetName`
+* `zipCode`
 
 #### Numbers
 
 * `randomNumber`
 * `randomFloat`
 * `numberBetween(a, b)`
+
+#### Business
+
+* `creditCardNumber`
+* `creditCardType`
+
+#### Company
+
+* `companyName`
+
+#### Internet
+
+* `avatarUrl`
+* `email`
+* `url`
+
+#### Lorem
+
+* `paragraph`
+* `sentence`
+* `word`
