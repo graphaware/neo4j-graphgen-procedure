@@ -31,7 +31,6 @@ public class GraphGenerator {
     }
 
     public List<Node> generateNodes(Label[] labels, String propertiesString, long number) {
-
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < number; ++i) {
             Node node = database.createNode(labels);
@@ -71,6 +70,9 @@ public class GraphGenerator {
     }
 
     private List<Property> getProperties(String definition) {
+        if (definition.equals("''") || definition.equals("'{}'") || definition.equals("") || definition.equals("{}")) {
+            return new ArrayList<>();
+        }
         return parser.parse(definition);
     }
 

@@ -18,7 +18,7 @@ public class ShuffleUtil {
         }
         Collections.shuffle(listClone);
 
-        return listClone.subList(0, count-1);
+        return listClone.subList(0, count);
     }
 
 }

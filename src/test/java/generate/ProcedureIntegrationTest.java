@@ -23,10 +23,12 @@ public abstract class ProcedureIntegrationTest {
         registerProcedure();
     }
 
-    protected abstract Class procedureClass();
+    protected abstract List<Class> procedureClass();
 
     private void registerProcedure() throws KernelException {
-        ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class).register(procedureClass());
+        for (Class clazz : procedureClass()) {
+            ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class).register(clazz);
+        }
     }
 
     protected GraphDatabaseService getDatabase() {

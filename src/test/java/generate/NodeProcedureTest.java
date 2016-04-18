@@ -6,6 +6,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,10 @@ import static org.junit.Assert.*;
 public class NodeProcedureTest extends ProcedureIntegrationTest {
 
     @Override
-    protected Class procedureClass() {
-        return NodeProcedure.class;
+    protected List<Class> procedureClass() {
+        return Arrays.asList(
+                NodeProcedure.class
+        );
     }
 
     @Test
