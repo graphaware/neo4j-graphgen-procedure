@@ -96,3 +96,7 @@ YIELD relationships as relationships RETURN *
 * `paragraph`
 * `sentence`
 * `word`
+
+#### Phone
+
+* `phoneNumber`

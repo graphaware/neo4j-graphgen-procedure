@@ -78,7 +78,7 @@ public class RelationshipProcedureTest extends ProcedureIntegrationTest {
     public void testRelationshipCreationWithProperties() {
         try (Transaction tx = getDatabase().beginTx()) {
             Result result = getDatabase().execute("CALL generate.nodes('Person', '', 10) YIELD nodes as persons " +
-                    "CALL generate.relationships(persons, persons, 'KNOWS', '{name: firstName}', 10, 1) YIELD relationships RETURN relationships");
+                    "CALL generate.relationships(persons, persons, 'KNOWS', '{since: unixTime}', 10, 1) YIELD relationships RETURN relationships");
 
             int i = 0;
             while (result.hasNext()) {
@@ -86,7 +86,7 @@ public class RelationshipProcedureTest extends ProcedureIntegrationTest {
                 List<Relationship> relationships = (List<Relationship>) row.get("relationships");
                 for (Relationship relationship : relationships) {
                     ++i;
-                    assertTrue(relationship.hasProperty("name"));
+                    assertTrue(relationship.hasProperty("since"));
                 }
             }
             assertEquals(10, i);

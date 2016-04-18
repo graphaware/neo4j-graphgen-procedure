@@ -7,6 +7,7 @@ import com.graphaware.neo4j.graphgen.graph.Property;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class FakerService {
 
@@ -39,6 +40,12 @@ public class FakerService {
     private static final String PARAGRAPH = "paragraph";
     private static final String SENTENCE = "sentence";
     private static final String WORD = "word";
+
+    // Phone
+    private static final String PHONE_NUMBER = "phoneNumber";
+
+    // Time
+    private static final String UNIX_TIME = "unixTime";
 
     private final Faker faker;
     private final Random random;
@@ -107,9 +114,24 @@ public class FakerService {
                 return faker.lorem().sentence();
             case WORD:
                 return faker.lorem().word();
+
+            // Phone
+            case PHONE_NUMBER:
+                return faker.phoneNumber().phoneNumber();
+
+            // Time
+            case UNIX_TIME:
+                return unixTime();
             default:
                 throw new IllegalArgumentException(String.format("Undefined value generator name '%s'", property.generatorName()));
         }
+    }
+
+    private long unixTime() {
+        long now = System.currentTimeMillis();
+        long diff = ThreadLocalRandom.current().nextLong(now);
+
+        return ThreadLocalRandom.current().nextLong((now - diff), now);
     }
 
     public Random getRandom() {
