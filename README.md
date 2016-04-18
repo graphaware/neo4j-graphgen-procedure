@@ -37,7 +37,7 @@ Relationships are generated using the `generate.relationships` procedure call. T
 * A `String` representing the relationship type
 * An `inline yaml` definition of key/value pairs where value represent a data generator (eg: `'{since: unixTime}'`)
 * An `integer or String` representing the amount of nodes from the start list to use
-* An 'integer or String' representing the amount of nodes each start node will connect to an end node
+* An `integer or String` representing the amount of nodes each start node will connect to an end node
 
 The two last parameters are dynamic, for example :
 
