@@ -7,6 +7,7 @@ import com.graphaware.neo4j.graphgen.graph.Property;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +40,12 @@ public class GraphGenerator {
 
         return nodes;
     }
+
+    /*
+    public List<Relationship> generateRelationships(List<Node> from, List<Node> to, String relationshipType, String properties, String fromCount, String toCount) {
+
+    }
+    */
 
     private List<Property> getProperties(String definition) {
         return parser.parse(definition);
