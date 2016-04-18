@@ -4,7 +4,7 @@
 
 ### Usage
 
-* Download and place the `graphaware-graphgen-procedure` in your Neo4j's `plugins` directory
+* Clone this repository, run `mvn clean package` and put the produced `graphaware-graphgen-procedure-1.0-ALPHA.jar` file in the Neo4j's `plugins` folder
 * Restart your Neo4j instance
 
 ### Generating nodes
