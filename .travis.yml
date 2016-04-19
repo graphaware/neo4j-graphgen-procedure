@@ -1,0 +1,12 @@
+language: java
+
+before_install:
+    - sudo apt-get update > /dev/null
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+
+branches:
+  only:
+    - master
