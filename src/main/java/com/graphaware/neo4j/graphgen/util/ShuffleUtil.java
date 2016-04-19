@@ -26,7 +26,7 @@ public class ShuffleUtil {
 
     public static List<Integer> shuffle(List<?> list, int count) {
         List<Integer> listClone = new ArrayList<>();
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < list.size(); ++i) {
             listClone.add(i);
         }
         if (list.size() == count) {
