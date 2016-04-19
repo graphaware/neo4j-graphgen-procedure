@@ -17,10 +17,13 @@
 package com.graphaware.neo4j.graphgen.faker;
 
 import com.github.javafaker.Faker;
+import com.google.common.collect.Range;
 import com.graphaware.neo4j.graphgen.configuration.GraphgenConfiguration;
 import com.graphaware.neo4j.graphgen.graph.Property;
+import com.graphaware.neo4j.graphgen.util.ShuffleUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -159,7 +162,7 @@ public class FakerService {
         return ThreadLocalRandom.current().nextLong((now - diff), now);
     }
 
-    private int numberBetween(Property property) {
+    public int numberBetween(Property property) {
         if (property.parameters().size() != 2) {
             throw new IllegalArgumentException(String.format("Expected exactly %d arguments, %d received", 2, property.parameters().size()));
         }
@@ -172,6 +175,10 @@ public class FakerService {
         }
 
         return ThreadLocalRandom.current().nextInt(i1, i2);
+    }
+
+    public Object randomElement(List<?> objects) {
+        return objects.get(ShuffleUtil.shuffle(objects, 1).get(0));
     }
 
     public Random getRandom() {
