@@ -185,8 +185,8 @@ public class FakerService {
             throw new IllegalArgumentException(String.format("Expected exactly %d arguments, %d received", 2, property.parameters().size()));
         }
 
-        Integer i1 = toIntExact((long) property.parameters().get(0));
-        Integer i2 = toIntExact((long) property.parameters().get(1));
+        Integer i1 = parseInt(property.parameters().get(0));
+        Integer i2 = parseInt(property.parameters().get(1));
 
         if (i1 >= i2) {
             throw new IllegalArgumentException("First parameter should not be greater or equal than second parameter");
@@ -245,6 +245,18 @@ public class FakerService {
 
     public Random getRandom() {
         return random;
+    }
+
+    private int parseInt(Object o) {
+        if (o instanceof String) {
+            return Integer.parseInt(o.toString());
+        }
+
+        if (o instanceof Long) {
+            return toIntExact((long) o);
+        }
+
+        return (int) o;
     }
 
 }
