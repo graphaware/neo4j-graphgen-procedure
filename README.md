@@ -2,6 +2,8 @@
 
 ## Generate Graph Test Data easily in your Neo4j browser
 
+[![Build Status](https://travis-ci.org/graphaware/neo4j-graphgen-procedure.svg?branch=master)](https://travis-ci.org/graphaware/neo4j-graphgen-procedure) Current release: (no release) - 1.0-ALPHA
+
 ### Usage
 
 * Clone this repository, run `mvn clean package` and put the produced `graphaware-graphgen-procedure-1.0-ALPHA.jar` file in the Neo4j's `plugins` folder
