@@ -121,6 +121,7 @@ Returns a linked list of feed nodes : `(feed)-[:NEXT]->(feed)-[:NEXT]->(feed)-[:
 * `avatarUrl`
 * `email`
 * `url`
+* `ipv4`
 
 #### Lorem
 

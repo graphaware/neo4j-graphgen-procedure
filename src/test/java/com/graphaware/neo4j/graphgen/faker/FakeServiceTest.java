@@ -36,6 +36,19 @@ public class FakeServiceTest {
         }
     }
 
+    @Test
+    public void testIpV4() {
+        for (int i = 0; i < 1000; ++i) {
+            String value = fakerService.ipV4();
+            String[] parts = value.split("\\.");
+            assertEquals(4, parts.length);
+            for (String p : parts) {
+                int s = Integer.valueOf(p);
+                assertTrue(s >= 0 && s <= 255);
+            }
+        }
+    }
+
     @After
     public void tearDown() {
         database.shutdown();

@@ -56,6 +56,7 @@ public class FakerService {
     private static final String AVATAR_URL = "avatarUrl";
     private static final String EMAIL_ADDRESS = "email";
     private static final String URL = "url";
+    private static final String IPV4 = "ipv4";
 
     // Lorem
     private static final String PARAGRAPH = "paragraph";
@@ -130,6 +131,8 @@ public class FakerService {
                 return faker.internet().emailAddress();
             case URL:
                 return faker.internet().url();
+            case IPV4:
+                return ipV4();
 
             // Lorem
             case PARAGRAPH:
@@ -155,7 +158,17 @@ public class FakerService {
         }
     }
 
-    private long unixTime() {
+    public String ipV4() {
+        return String.format(
+                "%d.%d.%d.%d",
+                random.nextInt(256),
+                random.nextInt(256),
+                random.nextInt(256),
+                random.nextInt(256)
+        );
+    }
+
+    public long unixTime() {
         long now = System.currentTimeMillis();
         long diff = ThreadLocalRandom.current().nextLong(now);
 
