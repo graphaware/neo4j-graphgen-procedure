@@ -44,6 +44,16 @@ public class GraphGenerator {
         this.random = fakerService.getRandom();
     }
 
+    public List<Object> generateValues(String name, List<Object> parameters, Long amount) {
+        Property property = new Property(name, name, parameters);
+        List<Object> values = new ArrayList<>();
+        for (int i = 0; i < amount; ++i) {
+            values.add(fakerService.getValue(property));
+        }
+
+        return values;
+    }
+
     public List<Node> generateNodes(Label[] labels, String propertiesString, long number) {
         List<Node> nodes = new ArrayList<>();
         for (int i = 0; i < number; ++i) {

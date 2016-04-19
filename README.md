@@ -53,6 +53,23 @@ CALL generate.relationships(persons, skills, 'HAS_SKILL', '{since: unixTime}', 1
 YIELD relationships as relationships RETURN *
 ```
 
+### Generating values
+
+As the same way you can create node and relationships, you can generate values :
+
+```cypher
+CALL generate.values('firstName', null, 10) YIELD values as values RETURN *
+```
+
+the second argument takes parameters when value generators need them, like `numberBetween` for example :
+
+```cypher
+CALL generate.values('numberBetween', [10, 100], 25) YIELD values RETURN values
+```
+
+This will generate 25 randomly generated numbers between 10 and 100.
+
+
 ### Available data providers
 
 #### Names

@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.Math.toIntExact;
+
 public class FakerService {
 
     // Names
@@ -62,6 +64,9 @@ public class FakerService {
 
     // Time
     private static final String UNIX_TIME = "unixTime";
+
+    // Numbers
+    private static final String NUMBER_BETWEEN = "numberBetween";
 
     private final Faker faker;
     private final Random random;
@@ -138,6 +143,10 @@ public class FakerService {
             // Time
             case UNIX_TIME:
                 return unixTime();
+
+            // Numbers
+            case NUMBER_BETWEEN:
+                return numberBetween(property);
             default:
                 throw new IllegalArgumentException(String.format("Undefined value generator name '%s'", property.generatorName()));
         }
@@ -148,6 +157,21 @@ public class FakerService {
         long diff = ThreadLocalRandom.current().nextLong(now);
 
         return ThreadLocalRandom.current().nextLong((now - diff), now);
+    }
+
+    private int numberBetween(Property property) {
+        if (property.parameters().size() != 2) {
+            throw new IllegalArgumentException(String.format("Expected exactly %d arguments, %d received", 2, property.parameters().size()));
+        }
+
+        Integer i1 = toIntExact((long) property.parameters().get(0));
+        Integer i2 = toIntExact((long) property.parameters().get(1));
+
+        if (i1 >= i2) {
+            throw new IllegalArgumentException("First parameter should not be greater or equal than second parameter");
+        }
+
+        return ThreadLocalRandom.current().nextInt(i1, i2);
     }
 
     public Random getRandom() {
