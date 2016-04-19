@@ -1,5 +1,6 @@
 package generate;
 
+import org.junit.After;
 import org.junit.Before;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
@@ -48,6 +49,11 @@ public abstract class ProcedureIntegrationTest {
         }
 
         return rows;
+    }
+
+    @After
+    public void tearDown() {
+        db.shutdown();
     }
 
 }
