@@ -71,6 +71,18 @@ CALL generate.values('numberBetween', [10, 100], 25) YIELD values RETURN values
 
 This will generate 25 randomly generated numbers between 10 and 100.
 
+## Extra procedures
+
+### Generating Linked Lists
+
+```cypher
+CALL generate.nodes('Feed', '{time: unixTime}', 10) YIELD nodes as feeds
+CALL generate.linkedList(feeds, 'NEXT') YIELD relationships, nodes
+RETURN *
+```
+
+Returns a linked list of feed nodes : `(feed)-[:NEXT]->(feed)-[:NEXT]->(feed)-[:NEXT]->(...)`
+
 
 ### Available data providers
 

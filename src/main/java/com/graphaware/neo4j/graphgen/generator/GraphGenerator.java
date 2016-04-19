@@ -21,6 +21,7 @@ import com.graphaware.neo4j.graphgen.faker.FakerService;
 import com.graphaware.neo4j.graphgen.graph.Property;
 import com.graphaware.neo4j.graphgen.util.CountSyntaxUtil;
 import com.graphaware.neo4j.graphgen.util.ShuffleUtil;
+import generate.result.GraphResult;
 import org.neo4j.graphdb.*;
 
 import java.util.ArrayList;
@@ -91,6 +92,16 @@ public class GraphGenerator {
         }
 
         return list;
+    }
+
+    public GraphResult generateLinkedList(List<Node> nodes, String relationshipType) {
+        List<Relationship> relationships = new ArrayList<>();
+        int i = 0;
+        while (i < nodes.size() - 1) {
+            relationships.add(nodes.get(i).createRelationshipTo(nodes.get(++i), RelationshipType.withName(relationshipType)));
+        }
+
+        return new GraphResult(nodes, relationships);
     }
 
     private List<Property> getProperties(String definition) {
