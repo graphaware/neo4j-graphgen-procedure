@@ -17,13 +17,12 @@
 package com.graphaware.neo4j.graphgen.faker;
 
 import com.github.javafaker.Faker;
-import com.google.common.collect.Range;
 import com.graphaware.neo4j.graphgen.configuration.GraphgenConfiguration;
 import com.graphaware.neo4j.graphgen.graph.Property;
 import com.graphaware.neo4j.graphgen.util.ShuffleUtil;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -44,6 +43,8 @@ public class FakerService {
     private static final String STREET_ADDRESS = "streetAddress";
     private static final String STREET_NAME = "streetName";
     private static final String ZIP_CODE = "zipCode";
+    private static final String LATITUDE = "latitude";
+    private static final String LONGITUDE = "longitude";
 
     // Business
     private static final String CREDIT_CARD_NUMBER = "creditCardNumber";
@@ -113,6 +114,10 @@ public class FakerService {
                 return faker.address().streetName();
             case ZIP_CODE:
                 return faker.address().zipCode();
+            case LATITUDE:
+                return latitude(property);
+            case LONGITUDE:
+                return longitude(property);
 
             // Business
             case CREDIT_CARD_NUMBER:
@@ -192,6 +197,50 @@ public class FakerService {
 
     public Object randomElement(List<?> objects) {
         return objects.get(ShuffleUtil.shuffle(objects, 1).get(0));
+    }
+
+    public double longitude(Property property) {
+        if (property.parameters().size() != 2 && property.parameters().size() != 0) {
+            throw new IllegalArgumentException("Number of parameters for the latitude generate should be exactly 2 or none");
+        }
+
+        int min = property.parameters().size() > 0 ? (Integer) property.parameters().get(0) : -180;
+        int max = property.parameters().size() > 0 ? (Integer) property.parameters().get(1) : 180;
+
+        return latitude(min, max);
+    }
+
+    public double longitude(int min, int max) {
+        return randomDouble(6, min, max);
+    }
+
+    public double latitude(Property property) {
+        if (property.parameters().size() != 2 && property.parameters().size() != 0) {
+            throw new IllegalArgumentException("Number of parameters for the latitude generate should be exactly 2 or none");
+        }
+
+        int min = property.parameters().size() > 0 ? (Integer) property.parameters().get(0) : -90;
+        int max = property.parameters().size() > 0 ? (Integer) property.parameters().get(1) : 90;
+
+        return latitude(min, max);
+    }
+
+    public double latitude(int min, int max) {
+        return randomDouble(6, min, max);
+    }
+
+    /**
+     * Returns a random double
+     *
+     * @param maxNumberOfDecimals maximum number of places
+     * @param min minimum value
+     * @param max maximum value
+     */
+
+    public double randomDouble(int maxNumberOfDecimals, int min, int max) {
+        double value = min + (max - min) * random.nextDouble();
+
+        return new BigDecimal(value).setScale(maxNumberOfDecimals, BigDecimal.ROUND_HALF_EVEN).doubleValue();
     }
 
     public Random getRandom() {

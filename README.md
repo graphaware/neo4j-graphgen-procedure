@@ -100,6 +100,8 @@ Returns a linked list of feed nodes : `(feed)-[:NEXT]->(feed)-[:NEXT]->(feed)-[:
 * `streetAddress`
 * `streetName`
 * `zipCode`
+* `latitude(min = -90, max = 90)`
+* `longitude(min = -180, max = 180)`
 
 #### Numbers
 
