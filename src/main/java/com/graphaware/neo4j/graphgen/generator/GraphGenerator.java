@@ -77,10 +77,10 @@ public class GraphGenerator {
 
         List<Property> propertyList = getProperties(properties);
         int fromS = CountSyntaxUtil.getCount(fromCount, random);
-        int toS = CountSyntaxUtil.getCount(toCount, random);
 
         List<Integer> fromNodes = ShuffleUtil.shuffle(from, fromS);
         for (int i : fromNodes) {
+            int toS = CountSyntaxUtil.getCount(toCount, random);
             List<Integer> toNodes = ShuffleUtil.shuffle(to, toS);
             Node start = from.get(i);
             for (int e : toNodes) {
