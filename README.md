@@ -105,7 +105,7 @@ Returns a linked list of feed nodes : `(feed)-[:NEXT]->(feed)-[:NEXT]->(feed)-[:
 
 #### Numbers
 
-* `randomNumber`
+* `randomNumber(numberOfDigits = 5, strict = false)` | numberOfDigits : default value generated, strict: generate only numbers with given number of digits
 * `randomFloat`
 * `numberBetween(a, b)`
 

@@ -20,6 +20,7 @@ import com.github.javafaker.Faker;
 import com.graphaware.neo4j.graphgen.configuration.GraphgenConfiguration;
 import com.graphaware.neo4j.graphgen.graph.Property;
 import com.graphaware.neo4j.graphgen.util.ShuffleUtil;
+import org.apache.commons.lang.math.RandomUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class FakerService {
 
     // Numbers
     private static final String NUMBER_BETWEEN = "numberBetween";
+    private static final String RANDOM_NUMBER = "randomNumber";
 
     private final Faker faker;
     private final Random random;
@@ -158,6 +160,8 @@ public class FakerService {
             // Numbers
             case NUMBER_BETWEEN:
                 return numberBetween(property);
+            case RANDOM_NUMBER:
+                return randomLong(property);
             default:
                 throw new IllegalArgumentException(String.format("Undefined value generator name '%s'", property.generatorName()));
         }
@@ -247,6 +251,33 @@ public class FakerService {
         return random;
     }
 
+    /**
+     * Returns a ranbom number
+     */
+
+    public long randomLong(Property property) {
+        int numberOfDigits = property.parameters().size() > 0 ? (int) property.parameters().get(0) : random.nextInt(8) + 1;
+        failZero(numberOfDigits);
+        boolean strict = property.parameters().size() > 1 && (boolean) property.parameters().get(1);
+
+        return randomLong(numberOfDigits, strict);
+    }
+
+    /**
+     *
+     * @param numberOfDigits the number of digits the generated value should have
+     * @param strict whether or not the generated value should have exactly <code>numberOfDigits</code>
+     */
+    public long randomLong(int numberOfDigits, boolean strict) {
+        long max = (long) Math.pow(10, numberOfDigits);
+        if (strict) {
+            long min = (long) Math.pow(10, numberOfDigits-1);
+            return min + ((long)(random.nextDouble()*(max - min)));
+        }
+
+        return (long) (random.nextDouble()*max);
+    }
+
     private int parseInt(Object o) {
         if (o instanceof String) {
             return Integer.parseInt(o.toString());
@@ -257,6 +288,12 @@ public class FakerService {
         }
 
         return (int) o;
+    }
+
+    private void failZero(int number) {
+        if (0 == number) {
+            throw new IllegalArgumentException("given number cannot be 0");
+        }
     }
 
 }

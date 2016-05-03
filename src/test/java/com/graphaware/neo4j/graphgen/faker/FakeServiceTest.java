@@ -85,6 +85,21 @@ public class FakeServiceTest {
         }
     }
 
+    @Test
+    public void testRandomNumber() {
+        for (int i = 0; i < 1000; ++i) {
+            Property property = new Property("accountBalance", "randomNumber", Arrays.asList());
+            Long n = fakerService.randomLong(property);
+        }
+
+        for (int i = 0; i < 1000; ++i) {
+            Property property = new Property("accountBalance", "randomNumber", Arrays.asList(5, true));
+            Long n = fakerService.randomLong(property);
+            String s = n.toString();
+            assertEquals(5, s.length());
+        }
+    }
+
     @After
     public void tearDown() {
         database.shutdown();
