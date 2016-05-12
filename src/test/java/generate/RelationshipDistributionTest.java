@@ -42,4 +42,17 @@ public class RelationshipDistributionTest extends ProcedureIntegrationTest {
 
         assertEquals(10, personsCount);
     }
+
+    @Test
+    public void testRelationshipDistributionLeft() {
+        int personsCount = 0;
+        executeCypher("CALL generate.nodes('Person', '{name: fullName}', 10) YIELD nodes as persons " +
+                "CALL generate.nodes('Skill', '{name: word}', 20) YIELD nodes as skills " +
+                "CALL generate.relationships(persons, skills, 'HAS_SKILL', '{since: unixTime}', '3-7', 10) " +
+                "YIELD relationships as relationships RETURN *");
+
+        try (Transaction tx = getDatabase().beginTx()) {
+            ResourceIterator<Node> it = getDatabase().findNodes(Label.label("Person"));
+        }
+    }
 }
